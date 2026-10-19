@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3e6c8">
+  <title>Hành trình đến Hiến pháp</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="game-shell" id="gameShell">
+    <header class="hud">
+      <div class="hud-title">
+        <span class="seal-mark" aria-hidden="true">★</span>
+        <div>
+          <p class="eyebrow">CHƯƠNG IV · CÙNG HỌC, CÙNG CHƠI</p>
+          <h1>HÀNH TRÌNH ĐẾN HIẾN PHÁP</h1>
+        </div>
+      </div>
+      <div class="hud-status">
+        <div class="level-label"><span id="levelName">SẴN SÀNG</span><small id="stageLabel">12 CHẶNG</small></div>
+        <div class="lives" id="lives" aria-label="Ba ngôi sao sinh lực"></div>
+        <div class="timer" id="timer" aria-live="off"><span class="timer-icon" aria-hidden="true">◷</span><span id="timerValue">--</span></div>
+        <button class="icon-button" id="pauseButton" type="button" title="Tạm dừng đồng hồ (P)" aria-label="Tạm dừng đồng hồ">Ⅱ</button>
+        <button class="icon-button" id="hostButton" type="button" title="Menu người dẫn" aria-label="Mở menu người dẫn">⚙</button>
+      </div>
+      <nav class="route-map" id="routeMap" aria-label="Tiến trình 12 chặng"></nav>
+    </header>
+
+    <section class="scene scene-level-1" id="scene" aria-label="Khung cảnh hành trình">
+      <div class="scene-sky"></div>
+      <div class="scene-sun"></div>
+      <div class="scene-far" id="sceneFar"></div>
+      <div class="scene-mid" id="sceneMid"></div>
+      <div class="scene-near" id="sceneNear"></div>
+      <div class="scene-banner" id="sceneBanner">LÀNG QUÊ 1945</div>
+      <div class="gate" id="gate" aria-hidden="true"><span class="gate-star">★</span><span class="gate-scroll">HIẾN<br>PHÁP</span><span class="gate-text">CỔNG HIẾN PHÁP</span></div>
+      <div class="road"></div>
+      <div class="runner" id="runner" aria-label="Phiếu Nhỏ">
+        <span class="runner-arm"></span>
+        <span class="runner-paper"><i class="runner-eye eye-one"></i><i class="runner-eye eye-two"></i><b class="runner-stamp">✓</b></span>
+        <span class="runner-leg leg-one"><i></i></span><span class="runner-leg leg-two"><i></i></span>
+      </div>
+      <div class="scene-caption" id="sceneCaption">PHIẾU NHỎ ĐANG LÊN ĐƯỜNG</div>
+      <div class="scene-flashlight" id="flashlight"></div>
+    </section>
+
+    <section class="question-panel" id="questionPanel" aria-live="polite">
+      <div class="panel-ribbon"><span id="panelLevel">MÀN 1</span><span id="panelKind">CÂU HỎI</span></div>
+      <div class="question-content" id="questionContent">
+        <p class="question-kicker" id="questionKicker">CHẶNG 1 / 12</p>
+        <h2 class="prompt" id="prompt">Hành trình sắp bắt đầu.</h2>
+        <div class="options-grid" id="optionsGrid"></div>
+        <div class="question-tools" id="questionTools">
+          <p class="feedback" id="feedback" role="status"></p>
+          <div class="tool-buttons">
+            <button class="tool-button" id="hintButton" type="button"><span aria-hidden="true">✦</span> Gợi ý <b id="hintCount">2</b></button>
+            <button class="tool-button" id="fiftyButton" type="button"><span aria-hidden="true">½</span> 50:50 <b id="fiftyCount">2</b></button>
+          </div>
+        </div>
+        <div class="boss-area" id="bossArea" hidden></div>
+      </div>
+      <div class="panel-footer"><span>PHIẾU NHỎ · NHÂN DÂN LÀM CHỦ</span><span id="keyboardHelp">A B C D chọn · H gợi ý · 5 loại 50:50 · P tạm dừng</span></div>
+    </section>
+
+    <section class="screen-overlay intro-screen" id="introScreen">
+      <div class="intro-poster">
+        <div class="poster-sunburst" aria-hidden="true">★</div>
+        <p class="poster-kicker">TRÒ CHƠI ÔN TẬP · CHƯƠNG IV</p>
+        <h2>Hành trình<br>đến Hiến pháp</h2>
+        <p class="intro-subtitle">Cùng Phiếu Nhỏ đi qua ba chặng đường dân chủ.</p>
+        <ul class="rule-list">
+          <li> Cả lớp cùng hô đáp án; người dẫn chọn A, B, C hoặc D.</li>
+          <li> Mỗi màn có ba ngôi sao. Trả lời sai hoặc hết giờ sẽ mất một sao.</li>
+          <li> Vượt câu hỏi, giải mật mã boss và gom các ý chính trên hành trình.</li>
+        </ul>
+        <button class="primary-button start-button" id="startButton" type="button">BẮT ĐẦU <span aria-hidden="true">➜</span></button>
+        <div class="poster-imprint">DÂN CHỦ · PHÁP QUYỀN · NHÂN DÂN LÀM CHỦ</div>
+      </div>
+    </section>
+
+    <section class="screen-overlay result-screen" id="resultScreen" hidden>
+      <div class="result-paper">
+        <p class="poster-kicker" id="resultKicker">TỔNG KẾT HÀNH TRÌNH</p>
+        <h2 id="resultTitle">Chốt ý</h2>
+        <div id="resultContent"></div>
+        <button class="primary-button" id="continueButton" type="button">TIẾP TỤC <span aria-hidden="true">➜</span></button>
+      </div>
+    </section>
+
+    <section class="screen-overlay failure-screen" id="failureScreen" hidden>
+      <div class="result-paper failure-paper">
+        <p class="poster-kicker">PHIẾU NHỎ CẦN NGHỈ MỘT CHÚT</p>
+        <h2>Màn thất bại</h2>
+        <p id="failureMessage">Hết sao mất rồi. Thử lại màn này nhé!</p>
+        <button class="primary-button" id="retryButton" type="button">↻ LÀM LẠI MÀN NÀY</button>
+      </div>
+    </section>
+
+    <section class="screen-overlay pause-screen" id="pauseScreen" hidden>
+      <div class="pause-stamp"><span>ĐỒNG HỒ<br>ĐANG TẠM DỪNG</span><button class="primary-button" id="resumeButton" type="button">TIẾP TỤC</button></div>
+    </section>
+
+    <dialog class="host-dialog" id="hostDialog" aria-labelledby="hostTitle">
+      <form method="dialog" class="host-form" id="hostForm">
+        <div class="dialog-heading"><div><p class="poster-kicker">BẢNG ĐIỀU KHIỂN</p><h2 id="hostTitle">Menu người dẫn</h2></div><button class="icon-button close-button" value="close" aria-label="Đóng menu">×</button></div>
+        <label class="setting-row"><span>Đồng hồ câu hỏi</span><input type="checkbox" id="timerToggle" checked><b class="switch" aria-hidden="true"></b></label>
+        <label class="setting-row"><span>Âm thanh</span><input type="checkbox" id="soundToggle" checked><b class="switch" aria-hidden="true"></b></label>
+        <label class="jump-label" for="jumpSelect">Nhảy tới màn / chặng</label>
+        <div class="jump-controls"><select id="jumpSelect"></select><button class="primary-button compact-button" id="jumpButton" type="button">ĐI TỚI</button></div>
+        <button class="reset-button" id="resetButton" type="button">↻ Làm lại toàn bộ trò chơi</button>
+      </form>
+    </dialog>
+
+    <footer class="game-footer"><span>HÀNH TRÌNH CỦA NHÂN DÂN</span><span id="soundStatus">ÂM THANH ĐANG BẬT</span><button class="fullscreen-button" id="fullscreenButton" type="button" title="Toàn màn hình (F)" aria-label="Bật toàn màn hình">⛶</button></footer>
+  </main>
+</body>
+</html>
